@@ -1,0 +1,8 @@
+typedef struct image_t{
+int alt;
+int larg;
+char arquivoimagem[50];
+
+}image;
+
+void open(image
