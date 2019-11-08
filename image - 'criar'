@@ -1,5 +1,31 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct image_t{
    int largura;
    int altura;
-   int 
+   int image_mat;
+   char nome[20];
+}image;
+
+typedef struct cor_t{
+   unsigned char red;
+   unsigned char green;
+   unsigned char blue;
+   unsigned char color_trat;
+}color;
+
+void image(int larg, int alt, char name[20], image *picture){
+    
+    FILE *arqtxt;
+    
+    arqtxt = fopen("input.txt", "a");
+    
+    fclose(arqtxt);
    
+   
+ int main(){
+   
+   image()
+   
+ }
