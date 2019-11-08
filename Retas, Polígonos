@@ -1,8 +1,77 @@
 typedef struct image_t{
 int alt;
 int larg;
-char arquivoimagem[50];
+char arquivoimagem[20];
+int matrizimagem[larg][alt];
 
 }image;
 
+void calloc_imagem(){
+
+    image picture;
+    picture.matrizimagem = calloc(1, sizeof(int**));
+  
+    for (int i = 0; i < 1; i++)
+    {
+        picture.matrizimagem[i] = calloc(1, sizeof(int*));
+    }
+    
+    for (int i = 0; i < 1; i++)
+    {
+        for (int j = 0; j < 1; j++)
+        {
+            picture.matrizimagem[i][j] = calloc(3, sizeof(int));
+        }
+    }
+    return picture;
+}
+
+/*funcao para criar retas*/
+void reta(image picture) {
+
+    int x0, x1, y0, y1;
+    int err, e2, iy, ix, fx, fy;
+    
+    ix = abs(x1 - x0);
+
+    if(x0 < x1){
+        fx = 1;
+    } else 
+    
+    {
+        fx = -1;
+    }
+
+    iy = abs(y1 - y0) * -1;
+
+    if(y0 < y1){
+        fy = 1;
+    } else 
+    
+    {
+        fy = -1;
+    }
+    
+    err = ix+iy;
+    
+    while (1){
+        picture.matrizimagem[x0][y0];
+        picture.matrizimagem[x0][y0];
+        picture.matrizimagem[x0][y0];
+
+        if (x0==x1 && y0==y1){
+            break;
+        }
+        e2 = 2*err;
+        if (e2 >= iy){
+            err += iy;
+            x0 += fx;
+        }
+        if (e2 <= ix){
+            err += ix;
+            y0 += fy;
+        }
+    }
+    return picture;   
+}
 void open(image
