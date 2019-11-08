@@ -18,13 +18,13 @@ https://www.youtube.com/watch?v=O5lqpxZQP-Y&t=137s
 #include <string.h>
 #include <stdio.h>
 
-//declaração de constantes para o programa no final do tempo de execução
+/*declaração de constantes para o programa no final do tempo de execução*/
 #define ERRO 0
 #define OK 1
 //underflow será causado quando o número nos pixeis for menor que 0, já ques estamos usando números do tipo com unsigned.
 #define UNDERFLOW 2
 
-//struct dos pixels.
+/*struct dos pixels.*/
 struct cor{
 	unsigned char red, green, blue;
 	int color;
@@ -32,13 +32,13 @@ struct cor{
 
 typedef enum cores_pixeis { red, green, blue }colors;
 
-//struct posição da matriz.
+/*struct posição da matriz.*/
 struct posMatriz {
 	unsigned int x;
 	unsigned int y;
 	struct posMatriz *Mat;
 };
-//struct de armazenamento das informações para a imagem.
+/*struct de armazenamento das informações para a imagem.*/
 struct Dados {
 	int quant;
 	struct posMatriz *top;
@@ -91,17 +91,17 @@ void devolver(struct Dados *dado, struct posMatriz *posMat, int *result){
 
 void verificar(struct cor **img, int i, int j, int lin, int col, struct Dados *dado){
 	int result;
-	//verificando cada pixel diferente do fundo.
+	/*verificando cada pixel diferente do fundo.*/
 	unsigned fred=img[0][0].red;
 	unsigned fgreen=img[0][0].green;
 	unsigned fblue=img[0][0].blue;
 	      if(j>0){
-	      	//verificando os pixeis diferentes do fundo, diferente de 1, se for diferente vamos marcar com 1.
+	      	/*verificando os pixeis diferentes do fundo, diferente de 1, se for diferente vamos marcar com 1.*/
 	      	if(((img[i][j-1].red!=fred) || (img[i][j-1].green!=fgreen) || (img[i][j-1].blue!=fblue)) && (img[i][j-1].color!=1)){
 			  
 	      	
 	      	img[i][j-1].color=1;
-	      	//jogando os pixeis maracados com 1 em dados.
+	      	/*jogando os pixeis maracados com 1 em dados.*/
 	      	jogarfundo(i, j-1, dado, &result);
 	      	
 		  }
@@ -117,7 +117,7 @@ void verificar(struct cor **img, int i, int j, int lin, int col, struct Dados *d
 	}
 	
 	if(j<col-1){
-		//verificando o contorno da matriz para não passar da matriz de pixeis, para não passar a borda.
+		/*verificando o contorno da matriz para não passar da matriz de pixeis, para não passar a borda.*/
 		if(((img[i][j+1].red!=fred) || (img[i][j+1].green!=fgreen) || (img[i][j+1].blue!=fblue)) && (img[i][j+1].color!=1)){
 		    
 		    img[i][j+1].color=1;
@@ -138,18 +138,18 @@ void verificar(struct cor **img, int i, int j, int lin, int col, struct Dados *d
 	}
 } 
 
-//função cria dados para o armazenamento.
+/*função cria dados para o armazenamento.*/
 struct Dados *criadata (int *result);
 
-//funcoes para o armazenamento da matriz.
+/*funcoes para o armazenamento da matriz.*/
 void jogarfundo(int x, int y, struct Dados *dado, int *result);
 void devolver(struct Dados *dado, struct posMatriz *posMat, int *result);
 
-//analisa a matriz e seus elementos.
+/*analisa a matriz e seus elementos.*/
 void verificar(struct cor **img, int i, int j, int lin, int col, struct Dados *dado);
 
 int main(){
-	//criando a leitura do arquivo e chamando as variaveis para cada struct.
+	/*criando a leitura do arquivo e chamando as variaveis para cada struct.*/
 	FILE *arquivo;
 	char farq[30];
 	char chave[3], c;
@@ -164,21 +164,21 @@ int main(){
 	struct posMatriz posMat;
 	int resulta;
 	
-	//chamando um repositório.
+	/*chamando um repositório.*/
 	dado = criadata(&resulta);
 	
-	//verificando o arquivo.
+	/*verificando o arquivo.*/
 	printf("DIGITE O NOME DO ARQUIVO NO FORMATO PPM: ");
 	scanf("%s", farq);
 	
-	//abrindo o arquivo.
+	/*abrindo o arquivo.*/
 	arquivo=fopen(farq, "rb");
 	if(arquivo==NULL){
 		printf("Erro para abrir o arquivo %s\n", farq);
 		return 0;
 	}
 
-//verificando se o arquivo é PPM.
+/*verificando se o arquivo é PPM.*/
 fscanf(arquivo,"%s", chave);
 if (strcmp(chave,"P6") !=0){
 	printf("Arquivo não é PPM\n");
@@ -186,21 +186,21 @@ if (strcmp(chave,"P6") !=0){
 	return 0;
 }
 
-//olhando o número de linhas e colunas, junto com o número dos pixeis.
+/*olhando o número de linhas e colunas, junto com o número dos pixeis.*/
 fscanf(arquivo,"%d %d %d", &col, &lin, &max255);
 fscanf(arquivo, "%c", &c);
 
 linha = lin;
 coluna = col;
 
-//alocação dinâmica da matriz para alocar a matriz zerada na memória.
+/*alocação dinâmica da matriz para alocar a matriz zerada na memória.*/
 img=(struct cor**) calloc(linha,sizeof(struct cor*));
 
 for (j=0; j<linha;j++){
 	img[j]=calloc(coluna,sizeof(struct cor));
 }
 
-//preenchendo a matriz com os dados dos pixeis RGB.
+/*preenchendo a matriz com os dados dos pixeis RGB.*/
 for(i=0;i<lin;i++){
 	for(j=0;j<col;j++){
 		fscanf(arquivo, "%c%c%c", &img[i][j].red, &img[i][j].green, &img[i][j].blue);
@@ -208,32 +208,32 @@ for(i=0;i<lin;i++){
 }
 fclose(arquivo);
 
-//locais do fundo da matriz na imagem com o RGB.
+/*locais do fundo da matriz na imagem com o RGB.*/
 fred = img[0][0].red;
 fgreen = img[0][0].green;
 fblue = img[0][0].blue;
 
 
-//analisa a matriz.
+/*analisa a matriz.*/
 for(i=0;i<lin;i++){
 	for(j=0;j<col;j++){
-		//comparação dos pixeis diferentes do fundo e assim ele marca com 1 caso ja tenha passado pelo fundo.
+		/*comparação dos pixeis diferentes do fundo e assim ele marca com 1 caso ja tenha passado pelo fundo.*/
 		if(((img[i][j].red!=fred) || (img[i][j].green!=fgreen) || (img[i][j].blue!=fblue)) &&(img[i][j].color!=1)){
 		
 		
 		img[i][j].color = 1;
 		
-		//passa a matriz e o armazenamento das informações em dado na struct dados.
+		/*passa a matriz e o armazenamento das informações em dado na struct dados.*/
 		verificar(img, i, j, lin, col, dado);
 		
 	}
 		while(dado->quant>0){
-			//se houver elementos no armazenamento em dado, devolvendo o resultado da posição na matriz.
+			/*se houver elementos no armazenamento em dado, devolvendo o resultado da posição na matriz.*/
 			devolver (dado, &posMat, &resulta);
-			//verifica o vetor nas posições x e y no último elemento incluso em dado.
+			/*verifica o vetor nas posições x e y no último elemento incluso em dado.*/
 			verificar(img, posMat.x, posMat.y, lin, col, dado);
 		}
-		//quando sair da parte do while na função de devolver, a contagem será iniciada para dizer o número de imagens.
+		/*quando sair da parte do while na função de devolver, a contagem será iniciada para dizer o número de imagens.*/
 		cont++;
 	}
 }
