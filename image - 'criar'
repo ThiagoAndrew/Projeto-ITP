@@ -1,0 +1,5 @@
+typedef struct image_t{
+   int largura;
+   int altura;
+   int 
+   
