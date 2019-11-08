@@ -27,7 +27,7 @@ void calloc_imagem(){
 }
 
 /*funcao para criar retas*/
-void reta(image picture) {
+void line(image picture) {
 
     int x0, x1, y0, y1;
     int err, e2, iy, ix, fx, fy;
