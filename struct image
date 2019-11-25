@@ -14,18 +14,3 @@ typedef struct cor_t{
    unsigned char blue;
    unsigned char color_trat;
 }color;
-
-void image(int larg, int alt, char name[20], image *picture){
-    
-    FILE *arqtxt;
-    
-    arqtxt = fopen("input.txt", "a");
-    
-    fclose(arqtxt);
-   
-   
- int main(){
-   
-   image()
-   
- }
