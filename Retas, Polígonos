@@ -1,11 +1,3 @@
-/*struct para criação da imagem. */
-typedef struct image_t{
-int alt;
-int larg;
-char arquivoimagem[20];
-int matrizimagem[larg][alt];
-
-}image;
 
 /*funcao abrir a imagem gerada*/
 void open(image picture, char arq[]){
