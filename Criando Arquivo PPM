@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -16,24 +15,33 @@ int main()
 {
   printf("image: ");
   int dimx, dimy;
-  scanf("image: %d %d", &dimx, &dimy);
+  scanf("%d %d", &dimx, &dimy);
   
   printf("save: ");
   char arq[50];
-  scanf("save: %s", arq);
+  
+  for (int i = 0; i < 50; ++i)
+   {
+    arq[i] = '\0';
+   }
+
+  scanf("%s", arq);
+
   
   int i, j;
   FILE *img = fopen(arq, "wb"); /* b - binary mode */
-  fprintf(img, "P6\n%d %d\n255\n", dimx, dimy);
+  fprintf(img, "P3\n%d %d\n255\n", dimx, dimy);
   for (j = 0; j < dimy; j++)
   {
     for (i = 0; i < dimx; i++)
     {
       static unsigned char color[3];
-      color[0] = i % 256;  //red
-      color[1] = j % 256;  //green 
-      color[2] = (i * j) % 256;  //blue 
-      fwrite(color, 1, 3, img);
+      color[0] = 255;  //red
+      color[1] = 255;  //green 
+      color[2] = 255;  //blue 
+      fprintf(img, "%d ", color[0]);
+      fprintf(img, "%d ", color[1]);
+      fprintf(img, "%d ", color[2]);
     }
   }
   fclose(img);
