@@ -1,33 +1,49 @@
 
-/*funcao abrir a imagem gerada*/
+/**
+*funcao abrir a imagem gerada.
+*/
 void open(image picture, char arq[]){
-    /* nome do arquivo para a abertura */
+    /**
+    *nome do arquivo para a abertura.
+    */
     char arquivo[20];
    
-    /* limite para percorrer a string do nome do arquivo*/
+    /** 
+    *limite para percorrer a string do nome do arquivo.
+    */
     for (int i = 0; i < 20; i++)
     {
         arquivo[i] = '\0';
     }
 
-    /* abertura do arquivo */
+    /**
+    *abertura do arquivo.
+    */
     FILE *file;
     file = fopen(nome_arquivo_tratado, "r");
 
-    /*tratamento para caso o arquivo não exista.*/
+    /**
+    *tratamento para caso o arquivo não exista.
+    */
     if(file == NULL){
         printf("Arquivo não encontrado");
     }
     
 
-/* cria a imagem */
+/**
+*cria a imagem.
+*/
 void calloc_imagem(){
     
-    /*chamndo struct da imagem para a alocação dinâmica da matriz da imagem na memória*/
+    /**
+    *chamndo struct da imagem para a alocação dinâmica da matriz da imagem na memória.
+    */
     image picture;
     picture.matrizimagem = calloc(1, sizeof(int**));
   
-    /* tratamento para a alocação*/
+    /**
+    *tratamento para a alocação.
+    */
     for (int i = 0; i < 1; i++)
     {
         picture.matrizimagem[i] = calloc(1, sizeof(int*));
@@ -43,16 +59,22 @@ void calloc_imagem(){
     return picture;
 }
 
-/*funcao para criar retas*/
+/**
+*funcao para criar retas.
+*/
 void line(image picture) {
     
-    /* parâmetros dos pontos da linha para formar a reta*/
+    /**
+    *parâmetros dos pontos da linha para formar a reta.
+    */
     int x0, x1, y0, y1;
     int err, e2, iy, ix, fx, fy;
     
     ix = abs(x1 - x0);
 
-    /* condições para o tratamento dos pontos inicias e finais na matriz da imagem. */
+    /**
+    *condições para o tratamento dos pontos inicias e finais na matriz da imagem.
+    */
     if(x0 < x1){
         fx = 1;
     } else 
@@ -73,7 +95,9 @@ void line(image picture) {
     
     err = ix+iy;
     
-    /* colocação dos pontos na matriz da imagem criada */
+    /**
+    *colocação dos pontos na matriz da imagem criada.
+    */
     while (1){
         picture.matrizimagem[x0][y0];
         picture.matrizimagem[x0][y0];
