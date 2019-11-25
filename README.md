@@ -16,3 +16,5 @@ Posteriormente, é necessário fazer o uso do comando "clear" para limpar e muda
 Após isso, o usuário pode salvar o seu projeto utilizando o comando "save", especificando o nome e a extensão ".ppm".
 
 Ademais, há a possibilidade de abrir uma imagem já existente a fim de que possa ser editada a partir do comando "open" e o nome do arquivo com a extensão “.ppm”
+
+O uso do Doxygen é mostrado o uso das variáveis e structs usado no projeto, separando em menus na página HTML.
