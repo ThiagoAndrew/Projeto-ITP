@@ -3,14 +3,6 @@
 #include <string.h>
 #include <stdio.h>
 
-/**
-*@author Thiago Andrew e Samuel Dumaresq.
-*@since nov 2019.
-*@version 1.0.
-*criação do arquivo ppm.
-*/
-
-/**
 *declaração de constantes para o programa no final do tempo de execução.
 */
 
