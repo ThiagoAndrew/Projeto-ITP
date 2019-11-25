@@ -1,5 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+/**
+*structs imagem.
+*/
 
 typedef struct image_t{
    int largura;
