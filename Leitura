@@ -110,13 +110,13 @@ int main(){
 	FILE *arquivo;
 	char farq[30];
 	
-	//param farq vetor para a leitura da imagem pronta.
+	\param farq vetor para a leitura da imagem pronta.
 	char chave[3], c;
 	int i, j, col, lin, max255;
 	struct cor **img;
 	unsigned char red, green, blue, fred, fblue, fgreen;
-	//param linha posição i da matriz.
-	//param coluna posição j da matriz.
+	\param linha posição i da matriz.
+	\param coluna posição j da matriz.
 	int linha, coluna;
 	long int pos;
 	int cont = 0;
@@ -227,7 +227,7 @@ for(i=0;i<lin;i++){
 	}
 }
 
-//param cont teste de pixeis presentes na imagem.
+\param cont teste de pixeis presentes na imagem.
 printf("Quantidade de pixeis = %d", cont);
 
 return 0;
