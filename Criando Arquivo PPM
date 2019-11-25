@@ -23,7 +23,7 @@ int main()
   *iniciação da criação do arquivo
   */
   
-  //param arq criação do nome do arquivo.
+  \param arq criação do nome do arquivo.
   
   for (int i = 0; i < 50; ++i)
    {
@@ -36,12 +36,12 @@ int main()
   int i, j;
   FILE *img = fopen(arq, "wb"); /* b - binary mode */
   fprintf(img, "P3\n%d %d\n255\n", dimx, dimy);
-  //param img abre o nome do arquivo.
-  //param 
+  \param img abre o nome do arquivo.
   for (j = 0; j < dimy; j++)
   {
     for (i = 0; i < dimx; i++)
     {
+      \param color vetor de cores da variavel.
       static unsigned char color[3];
       color[0] = 255;  //red
       color[1] = 255;  //green 
