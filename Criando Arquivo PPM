@@ -4,18 +4,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//criando um arquivo (imagem) no formato ppm 
+/*criando um arquivo (imagem) no formato ppm*/ 
 int main()
 {
   printf("image: ");
   int dimx, dimy;
   scanf("image: %d %d", &dimx, &dimy);
-  //printf("image: %d %d", dimx, dimy);
   
   printf("save: ");
   char arq[50];
   scanf("save: %s", arq);
- // printf("save: %s", file);
   
   int i, j;
   FILE *img = fopen(arq, "wb"); /* b - binary mode */
