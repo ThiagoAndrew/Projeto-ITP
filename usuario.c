@@ -6,6 +6,6 @@
 int main(int argc, char const *argv[])
 {
 
-    executar("input.txt");
+    compila("input.txt");
     return 0;
 }
