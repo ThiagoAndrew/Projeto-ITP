@@ -8,7 +8,7 @@ typedef struct entrada_t
     char nome_entrada[30]; /*!< nome da primitiva. */  
     int qtdentrada; /*!< quantidade de entrada passados na primitiva. */  
     int entrada[30]; /*!< entrada da primitiva. */  
-    char estradastring[30]; /*!< Parâmetros em String da primitiva*/  
+    char entradastring[30]; /*!< Parâmetros em String da primitiva*/  
     
 }entrada;
 
