@@ -35,8 +35,8 @@ void remove_barN(char entrada[], char saida[]);
 	Faz a alocação inicial do vetor tridimensional que guarda os pixels referentes a imagem que está sendo editada.
 	\return Uma instancia da struct imagem com a matriz tridimensional alocada.
 */
-//alocar == aloc
-imagem aloc_matriz();
+//alocar_matriz == aloc_mat
+imagem aloc_mat();
 
 //! Realoca a matriz de pixels com o tamanho necessário.
 /*!
@@ -44,8 +44,8 @@ imagem aloc_matriz();
 	de bytes de bytes necessária para armazenar todos os pixels da imagem com tal resolução.
 	\param img recebe o ponteiro com a imagem a ser realocada.
 */
-//realocar == realoc
-void realoc_matriz(imagem *img);
+//realocar_matriz == realoc_mat
+void realoc_mat(imagem *img);
 
 //! Desaloca a matriz de pixels.
 /*!
@@ -53,7 +53,7 @@ void realoc_matriz(imagem *img);
 	foram alocados na matriz de acordo com essa resolução.
 	\param img recebe o ponteiro com a imagem a ser desalocada.
 */
-//desalocar == desaloc
-void desaloc_matriz(imagem *img);
+//desalocar_matriz == desaloc_mat
+void desaloc_mat(imagem *img);
 
 #endifv
