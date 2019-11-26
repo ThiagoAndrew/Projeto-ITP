@@ -117,8 +117,8 @@ void desaloc_mat(imagem *img){
 
     free(img->matriz);
 }
-//alocar == aloc
-imagem aloc_matriz(){
+//alocar_matriz == aloc_mat
+imagem aloc_mat(){
 
     imagem img;
 
