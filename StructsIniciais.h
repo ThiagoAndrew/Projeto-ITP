@@ -1,5 +1,5 @@
-#ifndef structs_h 
-#define structs_h
+#ifndef StructsIniciais_h 
+#define StructsIniciais_h
 
 //! Struct do usuário para o input.
 /*! Recebe os comandos de cada linha input.*/
