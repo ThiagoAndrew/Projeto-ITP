@@ -97,7 +97,8 @@ void limpar_string_arquivo(char in[], char out[]){
 }
 
 //Limpa a matriz que representa a imagem na memória
-void desalocar_matriz(imagem *img){
+//desalocar_matriz == desaloc_mat
+void desaloc_mat(imagem *img){
 
     //puts("desalocando a matriz");
     for (int i = 0; i < img->altura; ++i)
@@ -116,8 +117,8 @@ void desalocar_matriz(imagem *img){
 
     free(img->matriz);
 }
-
-imagem alocar_matriz(){
+//alocar == aloc
+imagem aloc_matriz(){
 
     imagem img;
 
@@ -129,7 +130,8 @@ imagem alocar_matriz(){
 }
 
 //Realoca a matriz que representa a imagem na memória de acordo com resolução desejada
-void realocar_matriz(imagem *img){
+//realocar_matriz == realoc_mat
+void realoc_mat(imagem *img){
 
     //printf("Alt: %d\n", img->altura);
     //printf("Larg: %d\n", img->largura);
