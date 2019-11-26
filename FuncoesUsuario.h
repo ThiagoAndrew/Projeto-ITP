@@ -1,7 +1,7 @@
 /*! \Arquivo */ 
 
-#ifndef funcaoUsuario_h 
-#define funcaoUsuario_h
+#ifndef FuncoesUsuario_h 
+#define FuncoesUsuario_h
 
 //! Função Compila, utilizada no main do arquivo "Usuario.c".
 /*!
