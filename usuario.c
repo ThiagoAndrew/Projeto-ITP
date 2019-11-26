@@ -3,8 +3,7 @@
 #include "primitivas.h"
 #include "exec.h"
 
-int main(int argc, char const *argv[])
-{
+int main(){
 
     compila("input.txt");
     return 0;
