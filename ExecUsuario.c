@@ -17,22 +17,22 @@ void leitura(entrada *digita_inicial, entrada *digita_final, imagem *img){
 
     else if(strcmp(digita_inicial->nome_entrada, "image") == 0){
 
-        image(img, digita_inicial->entrada);   
+        image(img, digita_inicial->entrance);   
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "color") == 0){
 
-        color(img, digita_inicial->entrada);
+        color(img, digita_inicial->entrance);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "clear") == 0){
 
-        clear(img,digita_inicial->entrada);
+        clear(img,digita_inicial->entrance);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "line") == 0){
 
-        line(img, digita_inicial->entrada);
+        line(img, digita_inicial->entrance);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "open") == 0){
@@ -47,32 +47,32 @@ void leitura(entrada *digita_inicial, entrada *digita_final, imagem *img){
 
     else if(strcmp(digita_inicial->nome_entrada, "rect") == 0){
 
-        rect(img, digita_inicial->entrada);
+        rect(img, digita_inicial->entrance);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "circle") == 0){
 
-        circle(img, digita_inicial->entrada);
+        circle(img, digita_inicial->entrance);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "fill") == 0){
 
-        fill(img, digita_inicial->entrada);
+        fill(img, digita_inicial->entrance);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "repeat-line") == 0){
 
-        repeat_line(img, digita_inicial->entrada, digita_final);
+        repeat_line(img, digita_inicial->entrance, digita_final);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "copy-polygon") == 0){
 
-        copy_polygon(img, digita_inicial->entrada, digita_final);
+        copy_polygon(img, digita_inicial->entrance, digita_final);
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "repeat-polygon") == 0){
 
-        repeat_polygon(img, digita_inicial->entrada, digita_final);
+        repeat_polygon(img, digita_inicial->entrance, digita_final);
     }
 
 }
@@ -95,13 +95,13 @@ void compila(char name_arq[]){
     char texto[50]; 
     char entradas[50][50];
     char nome_entrada[50];
-    int entrada[30];
+    int entrance[30];
     int qtdentrada = 0;
 
     //limpa os vetores
     for (int i = 0; i < 30; ++i)
     {
-        entrada[i] = -1;
+        entrance[i] = -1;
     }
 
     for (int i = 0; i < 49; ++i)
@@ -137,12 +137,12 @@ void compila(char name_arq[]){
             for (int i = 0; i < 29; ++i)
             {
                 //converte a string vindo de entradas para o vetor de inteiros "parametros"
-                sscanf(entradas[i + 1], "%d", &entrada[i]);
+                sscanf(entradas[i + 1], "%d", &entrance[i]);
             }
 
             for (int i = 0; i < 30; ++i)
             {
-                if(entrada[i] == -1){
+                if(entrance[i] == -1){
                     break;
                 }
 
@@ -156,13 +156,13 @@ void compila(char name_arq[]){
             // limpa o vetor de instrução da struct
             for (int i = 0; i < 30; ++i)
             {
-               instrucao_inicial.entrada[i] = -1;
+               instrucao_inicial.entrance[i] = -1;
             }
 
             //copiar os parâmetros extraídos para o vetor de parâmetros
             for (int i = 0; i < 10; ++i)
             {
-               instrucao_inicial.entrada[i] = entrada[i];
+               instrucao_inicial.entrada[i] = entrance[i];
             }
             
             leitura(&instrucao_inicial, &instrucao_final, &pic);
@@ -179,13 +179,13 @@ void compila(char name_arq[]){
                 // limpa o vetor de instrução da struct
                 for (int i = 0; i < 30; ++i)
                 {
-                   instrucao_final.entrada[i] = -1;
+                   instrucao_final.entrance[i] = -1;
                 }
 
                 //copiar os parâmetros extraídos para o vetor de parâmetros
                 for (int i = 0; i < 10; ++i)
                 {
-                   instrucao_final.entrada[i] = entrada[i];
+                   instrucao_final.entrance[i] = entrance[i];
                 }
 
             }
@@ -193,7 +193,7 @@ void compila(char name_arq[]){
             //limpa os vetores para guardar novos valores
             for (int i = 0; i < 30; ++i)
             {
-                entrada[i] = -1;
+                entrance[i] = -1;
             }
 
             for (int i = 0; i < 49; ++i)
