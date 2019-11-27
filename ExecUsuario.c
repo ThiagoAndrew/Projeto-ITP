@@ -81,7 +81,7 @@ void leitura(entrada *digita_inicial, entrada *digita_final, imagem *img){
 para a função que faz a leitura juntamente com uma instância da imagem*/
 void compila(char name_arq[]){
 //alocar_matriz == aloc_mat
-    imagem img = aloc_mat();
+    imagem pic = aloc_mat();
     entrada instrucao_inicial;
     entrada instrucao_final;
 
@@ -165,7 +165,7 @@ void compila(char name_arq[]){
                instrucao_inicial.entrada[i] = entrada[i];
             }
             
-            interpretar(&instrucao_inicial, &instrucao_final, &img);
+            leitura(&instrucao_inicial, &instrucao_final, &pic);
 
 
             //preenche a struct com a entrada atual após executá-lo, servindo como um histórico
@@ -208,6 +208,6 @@ void compila(char name_arq[]){
         
         fclose(file);
 //desaloc_mat desaloca a matriz
-        desaloc_mat(&img);
+        desaloc_mat(&pic);
     }
 }
