@@ -25,7 +25,7 @@ void line(imagem *img, int entrance[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor com a quantidade de pontos e as coordenadas deles.
 */
-void polygon(imagem *img, entrance in);
+void polygon(imagem *img, entrada in);
 
 //! Cria um círculo
 /*!
