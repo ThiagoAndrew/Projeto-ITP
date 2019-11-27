@@ -87,7 +87,7 @@ void compila(char name_arq[]){
 
     strcpy(instrucao_final.nome_entrada, "vazio");
 
-    strcpy(img.nome_image, "test.ppm");
+    strcpy(pic.nome_image, "test.ppm");
 
     FILE *file;
     file = fopen(name_arq, "r");
@@ -162,7 +162,7 @@ void compila(char name_arq[]){
             //copiar os parâmetros extraídos para o vetor de parâmetros
             for (int i = 0; i < 10; ++i)
             {
-               instrucao_inicial.entrada[i] = entrance[i];
+               instrucao_inicial.entrance[i] = entrance[i];
             }
             
             leitura(&instrucao_inicial, &instrucao_final, &pic);
