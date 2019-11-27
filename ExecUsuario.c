@@ -1,6 +1,6 @@
 #include "StructsIniciais.h"
 #include "FuncoesUsuario.h"
-#include "primitivas.h"
+#include "PrimiGraphics.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
