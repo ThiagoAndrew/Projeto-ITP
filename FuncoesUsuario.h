@@ -23,6 +23,6 @@ void compila(char name_arq[]);
   \param picture recebe um ponteiro de uma struct image com a imagem a ser modificada pelas primitivas
 */
 
-void leitura(entrada *digita_inicial, comando *digita_final, image *img);
+void leitura(entrada *digita_inicial, entrada *digita_final, image *img);
 
 #endif
