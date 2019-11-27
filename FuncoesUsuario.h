@@ -1,4 +1,4 @@
-/*! \Arquivo */ 
+/*! \file */
 
 #ifndef FuncoesUsuario_h 
 #define FuncoesUsuario_h
