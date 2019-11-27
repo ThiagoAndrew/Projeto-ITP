@@ -207,7 +207,7 @@ void compila(char name_arq[]){
         }
         
         fclose(file);
-//desalocar_matriz == desaloc_mat
+//desaloc_mat desaloca a matriz
         desaloc_mat(&img);
     }
 }
