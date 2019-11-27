@@ -7,7 +7,7 @@
 
 /*Recebe a imagem e os comandos vindo do arquivo do Usuário, chamando a 
 função com a imagem a ser modificada */
-void leitura(entrada *digita_inicial, entrada *digita_final, image *img){
+void leitura(entrada *digita_inicial, entrada *digita_final, imagem *img){
 
 
     if(strcmp(digita_inicial->nome_entrada, "save") == 0){
@@ -17,7 +17,7 @@ void leitura(entrada *digita_inicial, entrada *digita_final, image *img){
 
     else if(strcmp(digita_inicial->nome_entrada, "image") == 0){
 
-        image(img, digita_inicial->entrada);   
+        imagem(img, digita_inicial->entrada);   
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "color") == 0){
@@ -81,7 +81,7 @@ void leitura(entrada *digita_inicial, entrada *digita_final, image *img){
 para a função que faz a leitura juntamente com uma instância da imagem*/
 void compila(char name_arq[]){
 //alocar_matriz == aloc_mat
-    image img = aloc_mat();
+    imagem img = aloc_mat();
     entrada instrucao_inicial;
     entrada instrucao_final;
 
