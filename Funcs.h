@@ -45,7 +45,7 @@ image aloc_mat();
 	\param img recebe o ponteiro com a imagem a ser realocada.
 */
 //realoc_mat realoca a matriz.
-void realoc_mat(image *img);
+void realoc_mat(imagem *img);
 
 //! Desaloca a matriz de pixels.
 /*!
@@ -54,6 +54,6 @@ void realoc_mat(image *img);
 	\param img recebe o ponteiro com a imagem a ser desalocada.
 */
 //desaloc_mat desaloca a matriz.
-void desaloc_mat(image *img);
+void desaloc_mat(imagem *img);
 
 #endifv
