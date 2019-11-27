@@ -7,7 +7,7 @@
 
 /*Recebe a imagem e os comandos vindo do arquivo do Usuário, chamando a 
 função com a imagem a ser modificada */
-void leitura(entrada *digita_inicial, comando *digita_final, image *img){
+void leitura(entrada *digita_inicial, entrada *digita_final, image *img){
 
 
     if(strcmp(digita_inicial->nome_entrada, "save") == 0){
