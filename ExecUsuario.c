@@ -17,7 +17,7 @@ void leitura(entrada *digita_inicial, entrada *digita_final, imagem *img){
 
     else if(strcmp(digita_inicial->nome_entrada, "image") == 0){
 
-        imagem(img, digita_inicial->entrada);   
+        image(img, digita_inicial->entrada);   
     }
 
     else if(strcmp(digita_inicial->nome_entrada, "color") == 0){
