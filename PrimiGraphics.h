@@ -79,7 +79,7 @@ void rect(imagem *img, int entrance[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor contendo a quantidade de repetições e os incrementos.
 */
-void repeat_line(imagem *img, int entrance[], entrance *digita_final);
+void repeat_line(imagem *img, int entrance[], entrada *digita_final);
 
 //! Repete um polígono.
 /*!
@@ -92,7 +92,7 @@ void repeat_line(imagem *img, int entrance[], entrance *digita_final);
 	\param digita_final recebe um ponteiro referente a uma struct comando que contem a última instrução que contem o polígono
 	a ser repetido.
 */
-void repeat_polygon(imagem *img, int entrance[], entrance *digita_final);
+void repeat_polygon(imagem *img, int entrance[], entrada *digita_final);
 
 //! Copia um polígono.
 /*!
@@ -105,7 +105,7 @@ void repeat_polygon(imagem *img, int entrance[], entrance *digita_final);
 	\param digita_final recebe um ponteiro referente a uma struct comando que contem a última instrução que contem o polígono
 	a ser repetido.
 */
-void copy_polygon(imagem *img, int entrance[], entrance *digita_final);
+void copy_polygon(imagem *img, int entrance[], entrada *digita_final);
 
 //! Abre uma imagem.
 /*!
