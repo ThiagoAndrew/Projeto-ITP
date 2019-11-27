@@ -14,7 +14,7 @@ typedef struct entrada_t
 
 //! Struct da imagem criada.
 /*! Armazena os pixels da imagem, cor usada na primitiva, tamanho, nome */
-typedef struct  image_t
+typedef struct  imagem_t
 {
     int ***matrizimg; /*!< vetor tridimensional de pixels. */  
     int alturaimg; /*!< altura da imagem. */  
@@ -22,6 +22,6 @@ typedef struct  image_t
     int cor_img[3]; /*!< cor atual da imagem, para uso nas primitivas. */  
     char nome_image[21]; /*!< nome do arquivo da imagem. */  
     
-}image;
+}imagem;
 
 #endif
