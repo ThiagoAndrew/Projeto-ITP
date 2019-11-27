@@ -1,3 +1,5 @@
+/*! \file */ 
+
 #ifndef PrimiGraphics_h 
 #define PrimiGraphics_h
 
