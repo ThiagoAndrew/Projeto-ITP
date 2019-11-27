@@ -5,7 +5,7 @@
 #include <string.h>
 
 //Salva a imagem no arquivo de acordo com a matriz de pixels
-void save(image *img, char name_arq[]){
+void save(imagem *img, char name_arq[]){
 
     FILE *file = fopen(name_arq, "wb");
     fprintf(file, "P3\n%d %d\n255\n", img->larguraimg, img->alturaimg);
@@ -25,7 +25,7 @@ void save(image *img, char name_arq[]){
 }
 
 //Função para criar uma reta na imagem
-void line(image *img, int entrada[]) {
+void line(imagem *img, int entrada[]) {
 
     int x0 = entrada[0];
     int x1 = entrada[2];
@@ -82,7 +82,7 @@ void line(image *img, int entrada[]) {
     }
 }
 
-void repeat_line(image *img, int entrada[], entrada *digita_final){
+void repeat_line(imagem *img, int entrada[], entrada *digita_final){
 
     if(strcmp(digita_final->nome_entrada, "line") == 0){
 
@@ -106,7 +106,7 @@ void repeat_line(image *img, int entrada[], entrada *digita_final){
 }
 
 //Função para criar uma reta na imagem
-void polygon(image *img, entrada in){
+void polygon(imagem *img, entrada in){
 
     int qtd_point = in.entrada[0];
     int ordenY = in.qtdentrada -1;
@@ -152,7 +152,7 @@ void polygon(image *img, entrada in){
 }
 
 //Repete um polígono definido na linha anterior n vezes com incrementos na posição x e y
-void repeat_polygon(image *img, int entrada[], entrada *digita_final){
+void repeat_polygon(imagem *img, int entrada[], entrada *digita_final){
 
     if(strcmp(digita_final->nome_entrada, "polygon") == 0){
 
@@ -177,7 +177,7 @@ void repeat_polygon(image *img, int entrada[], entrada *digita_final){
 }
 
 //Copia o polígono definido na linha anterior para uma nova coordenada
-void copy_polygon(image *img, int entrada[], entrada *digita_final){
+void copy_polygon(imagem *img, int entrada[], entrada *digita_final){
 
     int distancy_x = entrada[0] - digita_final->entrada[1];
     int distancy_y = entrada[1] - digita_final->entrada[2];
@@ -194,7 +194,7 @@ void copy_polygon(image *img, int entrada[], entrada *digita_final){
 }
 
 //Definindo a cor atual
-void color(image *img, int entrada[]){
+void color(imagem *img, int entrada[]){
     
     for (int i = 0; i < 3; ++i)
     {
@@ -203,7 +203,7 @@ void color(image *img, int entrada[]){
 }
 
 //Limpa a imagem deixando todos os pixels com a cor recebida por parâmetro
-void clear(image *img, int entrada[]){
+void clear(imagem *img, int entrada[]){
 
     for(int i = 0; i < img->alturaimg; i++)
     {
@@ -217,7 +217,7 @@ void clear(image *img, int entrada[]){
 }
 
 //Criar retângulos
-void rect(image *img, int entrada[]){
+void rect(imagem *img, int entrada[]){
 
     entrada in;
     in.qtdentrada = 9; 
@@ -236,7 +236,7 @@ void rect(image *img, int entrada[]){
 }
 
 //Criar círculos
-void circle(image *img, int entrada[]){
+void circle(imagem *img, int entrada[]){
 
     int r = entrada[2];
     int x0 = entrada[0];
@@ -283,7 +283,7 @@ void circle(image *img, int entrada[]){
 }
 
 //Função recursiva adaptada do colega de classe Rodrigo para a execução do fill no preenchimento
-void rec_fill(image *img, int x, int y, int color_initial[]){
+void rec_fill(imagem *img, int x, int y, int color_initial[]){
 
     int pixel_validate = 1;
 
@@ -326,7 +326,7 @@ void rec_fill(image *img, int x, int y, int color_initial[]){
 }
 
 // preenchimento de figuras
-void fill(image *img, int entrada[]){
+void fill(imagem *img, int entrada[]){
 
     int x = entrada[0];
     int y = entrada[1];
@@ -354,7 +354,7 @@ void fill(image *img, int entrada[]){
 }
  
 //Abre um arquivo de imagem ppm para edição pelo usuário.
-void open(image *img, char name_arq[]){
+void open(imagem *img, char name_arq[]){
 
     char texto[15];
     char texto_split[3][50];
@@ -420,7 +420,7 @@ void open(image *img, char name_arq[]){
 }
 
 //Define a resolução da imagem criada, adaptado do colega Rodrigo
-void image(image *img, int entrada[]) {
+void image(imagem *img, int entrada[]) {
 
     img->alturaimg = entrada[1];
     img->larguraimg = entrada[0];
