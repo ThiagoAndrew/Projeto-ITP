@@ -5,18 +5,18 @@
 #include <string.h>
 
 //Salva a imagem no arquivo de acordo com a matriz de pixels
-void save(imagem *img, char nome_arquivo[]){
+void save(image *img, char name_arq[]){
 
-    FILE *file = fopen(nome_arquivo, "wb");
-    fprintf(file, "P3\n%d %d\n255\n", img->largura, img->altura);
+    FILE *file = fopen(name_arq, "wb");
+    fprintf(file, "P3\n%d %d\n255\n", img->larguraimg, img->alturaimg);
     
-    for (int i = 0; i < img->altura; ++i)
+    for (int i = 0; i < img->alturaimg; ++i)
     {
-        for (int j = 0; j < img->largura; ++j)
+        for (int j = 0; j < img->larguraimg; ++j)
         {
             for (int z = 0; z < 3; ++z)
             {   
-                fprintf(file, "%d ", img->matriz[i][j][z]);
+                fprintf(file, "%d ", img->matrizimg[i][j][z]);
             }
         }
     }
@@ -25,13 +25,12 @@ void save(imagem *img, char nome_arquivo[]){
 }
 
 //Função para criar uma reta na imagem
-//Algoritmo adptado de https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases
-void line(imagem *img, int parametros[]) {
+void line(image *img, int entrada[]) {
 
-    int x0 = parametros[0];
-    int x1 = parametros[2];
-    int y0 = parametros[1];
-    int y1 = parametros[3];
+    int x0 = entrada[0];
+    int x1 = entrada[2];
+    int y0 = entrada[1];
+    int y1 = entrada[3];
     int err, dy, dx, sx, sy, e2;
 
     dx = abs(x1 - x0);
@@ -61,7 +60,7 @@ void line(imagem *img, int parametros[]) {
 
         for (int i = 0; i < 3; ++i)
         {
-           img->matriz[y0][x0][i] = img->cor_atual[i];
+           img->matrizimg[y0][x0][i] = img->cor_img[i];
         }
 
         if (x0==x1 && y0==y1){
@@ -83,178 +82,177 @@ void line(imagem *img, int parametros[]) {
     }
 }
 
-void repeat_line(imagem *img, int parametros[], comando *ultima_entrada){
+void repeat_line(image *img, int entrada[], entrada *digita_final){
 
-    if(strcmp(ultima_entrada->nome_comando, "line") == 0){
+    if(strcmp(digita_final->nome_entrada, "line") == 0){
 
-        int quantidade = parametros[0];
-        int deltax0 = parametros[1];
-        int deltay0 = parametros[2];
-        int deltax1 = parametros[3];
-        int deltay1 = parametros[4];
-        int novos_parametros[4];
+        int quant = entrada[0];
+        int delx0 = entrada[1];
+        int dely0 = entrada[2];
+        int delx1 = entrada[3];
+        int dely1 = entrada[4];
+        int nova_entrada[4];
 
-        for (int i = 0; i < quantidade; ++i)
+        for (int i = 0; i < quant; ++i)
         {   
-            novos_parametros[0] = ultima_entrada->parametros[0] + deltax0 * (i + 1);
-            novos_parametros[1] = ultima_entrada->parametros[1] + deltay0 * (i + 1);
-            novos_parametros[2] = ultima_entrada->parametros[2] + deltax1 * (i + 1);
-            novos_parametros[3] = ultima_entrada->parametros[3] + deltay1 * (i + 1);
-            line(img, novos_parametros);
+            nova_entrada[0] = digita_final->entrada[0] + delx0 * (i + 1);
+            nova_entrada[1] = digita_final->entrada[1] + dely0 * (i + 1);
+            nova_entrada[2] = digita_final->entrada[2] + delx1 * (i + 1);
+            nova_entrada[3] = digita_final->entrada[3] + dely1 * (i + 1);
+            line(img, nova_entrada);
         }
         
     }
 }
 
 //Função para criar uma reta na imagem
-void polygon(imagem *img, comando cmd){
+void polygon(image *img, entrada in){
 
-    int qtd_pontos = cmd.parametros[0];
-    int ordenadas = cmd.qtd_parametros -1;
-    int parametros[4];
-    int retas[ordenadas][4];
-    int indice_retas = 0;
+    int qtd_point = in.entrada[0];
+    int ordenY = in.qtdentrada -1;
+    int entrada[4];
+    int rect[ordenY][4];
+    int ind_rect = 0;
 
     //cria as retas
-    for (int i = 0; i < ordenadas; i += 2)
+    for (int i = 0; i < ordenY; i += 2)
     {
         if(i == ordenadas - 2) {
 
-            retas[indice_retas][0] = cmd.parametros[i + 1];
-            retas[indice_retas][1] = cmd.parametros[i + 2];
-            retas[indice_retas][2] = cmd.parametros[1];
-            retas[indice_retas][3] = cmd.parametros[2];
+            rect[ind_rect][0] = in.entrada[i + 1];
+            rect[ind_rect][1] = in.entrada[i + 2];
+            rect[ind_rect][2] = in.entrada[1];
+            rect[ind_rect][3] = in.entrada[2];
 
-            indice_retas++;
+            ind_rect++;
                 
         } else {
 
-            retas[indice_retas][0] = cmd.parametros[i + 1];
-            retas[indice_retas][1] = cmd.parametros[i + 2];
-            retas[indice_retas][2] = cmd.parametros[i + 3];
-            retas[indice_retas][3] = cmd.parametros[i + 4];
+            rect[ind_rect][0] = in.entrada[i + 1];
+            rect[ind_rect][1] = in.entrada[i + 2];
+            rect[ind_rect][2] = in.entrada[i + 3];
+            rect[ind_rect][3] = in.entrada[i + 4];
 
-            indice_retas++;
+            ind_rect++;
         }
     }
 
     //coloca as retas na imagem.
-    for (int i = 0; i < indice_retas; ++i)
+    for (int i = 0; i <  ind_rect; ++i)
     {
         for (int j = 0; j < 4; ++j)
         {
 
-            parametros[j] = retas[i][j];  
+            entrada[j] = rect[i][j];  
 
         }
 
-        line(img, parametros);
+        line(img, entrada);
     }
 }
 
 //Repete um polígono definido na linha anterior n vezes com incrementos na posição x e y
-void repeat_polygon(imagem *img, int parametros[], comando *ultima_entrada){
+void repeat_polygon(image *img, int entrada[], entrada *digita_final){
 
-    if(strcmp(ultima_entrada->nome_comando, "polygon") == 0){
+    if(strcmp(digita_final->nome_entrada, "polygon") == 0){
 
-        int quantidade = parametros[0];
-        int deltax = parametros[1];
-        int deltay = parametros[2];
-        int ordenadas = ultima_entrada->parametros[0] * 2;
+        int quant = entrada[0];
+        int delx = entrada[1];
+        int dely = entrada[2];
+        int ordenY = digita_final->entrada[0] * 2;
 
-        comando novo_poligono = *ultima_entrada;
+        entrada new_polygon = *digita_final;
 
-        for (int i = 0; i < quantidade; ++i)
+        for (int i = 0; i < quant; ++i)
         {
-            for (int j = 1; j < ordenadas + 1; j+=2)
+            for (int j = 1; j < ordenY + 1; j+=2)
             {
-                novo_poligono.parametros[j] += deltax;
-                novo_poligono.parametros[j + 1] += deltay;
+                new_polygon.entrada[j] += delx;
+                new_polygon.entrada[j + 1] += dely;
             }
 
-            polygon(img, novo_poligono);
+            polygon(img, new_polygon);
         }
     }
 }
 
 //Copia o polígono definido na linha anterior para uma nova coordenada
-void copy_polygon(imagem *img, int parametros[], comando *ultima_entrada){
+void copy_polygon(image *img, int entrada[], entrada *digita_final){
 
-    int distanciax = parametros[0] - ultima_entrada->parametros[1];
-    int distanciay = parametros[1] - ultima_entrada->parametros[2];
-    int pontos = ultima_entrada->parametros[0];
-    int qtd_parametros = ultima_entrada->qtd_parametros;
+    int distancy_x = entrada[0] - digita_final->entrada[1];
+    int distancy_y = entrada[1] - digita_final->entrada[2];
+    int points = digita_final->entrada[0];
+    int qtdentrada = digita_final->qtdentrada;
 
-    for (int i = 0; i < pontos * 2; i += 2)
+    for (int i = 0; i < points * 2; i += 2)
     {
-        ultima_entrada->parametros[i + 1] += distanciax;
-        ultima_entrada->parametros[i + 2] += distanciay;
+        digita_final->entrada[i + 1] += distancy_x;
+        digita_final->entrada[i + 2] += distancy_y;
     }
 
-    polygon(img, *ultima_entrada);
+    polygon(img, *digita_final);
 }
 
-//Define a cor atual
-void color(imagem *img, int parametros[]){
+//Definindo a cor atual
+void color(image *img, int entrada[]){
     
     for (int i = 0; i < 3; ++i)
     {
-        img->cor_atual[i] = parametros[i];
+        img->cor_img[i] = entrada[i];
     }
 }
 
 //Limpa a imagem deixando todos os pixels com a cor recebida por parâmetro
-void clear(imagem *img, int parametros[]){
+void clear(image *img, int entrada[]){
 
-    for(int i = 0; i < img->altura; i++)
+    for(int i = 0; i < img->alturaimg; i++)
     {
-        for (int j = 0; j < img->largura; ++j)
+        for (int j = 0; j < img->larguraimg; ++j)
         {   
-            img->matriz[i][j][0] = parametros[0];
-            img->matriz[i][j][1] = parametros[1];
-            img->matriz[i][j][2] = parametros[2];
+            img->matrizimg[i][j][0] = entrada[0];
+            img->matrizimg[i][j][1] = entrada[1];
+            img->matrizimg[i][j][2] = entrada[2];
         }
     }
 }
 
-//Cria retângulos
-void rect(imagem *img, int parametros[]){
+//Criar retângulos
+void rect(image *img, int entrada[]){
 
-    comando cmd;
-    cmd.qtd_parametros = 9;
+    entrada in;
+    in.qtdentrada = 9; 
 
-    cmd.parametros[0] = 4;
-    cmd.parametros[1] = parametros[0];
-    cmd.parametros[2] = parametros[1];
-    cmd.parametros[3] = parametros[0] + parametros[2];
-    cmd.parametros[4] = parametros[1];
-    cmd.parametros[5] = parametros[0] + parametros[2];
-    cmd.parametros[6] = parametros[1] + parametros[3];
-    cmd.parametros[7] = parametros[0];
-    cmd.parametros[8] = parametros[1] + parametros[3];
+    in.entrada[0] = 4;
+    in.entrada[1] = entrada[0];
+    in.entrada[2] = entrada[1];
+    in.entrada[3] = entrada[0] + entrada[2];
+    in.entrada[4] = entrada[1];
+    in.entrada[5] = entrada[0] + entrada[2];
+    in.entrada[6] = entrada[1] + entrada[3];
+    in.entrada[7] = entrada[0];
+    in.entrada[8] = entrada[1] + entrada[3];
 
-    polygon(img, cmd);
+    polygon(img, in);
 }
 
-//Cria círculos
-//Algoritmo adaptado de https://rosettacode.org/wiki/Bitmap/Midpoint_circle_algorithm#C
-void circle(imagem *img, int parametros[]){
+//Criar círculos
+void circle(image *img, int entrada[]){
 
-    int raio = parametros[2];
-    int x0 = parametros[0];
-    int y0 = parametros[1];
-    int f = 1 - raio;
+    int r = entrada[2];
+    int x0 = entrada[0];
+    int y0 = entrada[1];
+    int f = 1 - r;
     int ddF_x = 0;
     int ddF_y = -2 * raio;
     int x = 0;
-    int y = raio;
+    int y = r;
 
     for (int i = 0; i < 3; ++i)
     {
-        img->matriz[x0][y0 + raio][i] = img->cor_atual[i];
-        img->matriz[x0][y0 - raio][i] = img->cor_atual[i];
-        img->matriz[x0 + raio][y0][i] = img->cor_atual[i];
-        img->matriz[x0 - raio][y0][i] = img->cor_atual[i];
+        img->matrizimg[x0][y0 + r][i] = img->cor_img[i];
+        img->matrizimg[x0][y0 - r][i] = img->cor_img[i];
+        img->matrizimg[x0 + r][y0][i] = img->cor_img[i];
+        img->matrizimg[x0 - r][y0][i] = img->cor_img[i];
     }
 
     while(x < y){
@@ -272,151 +270,148 @@ void circle(imagem *img, int parametros[]){
 
         for (int i = 0; i < 3; ++i)
         {
-            img->matriz[x0 + x][y0 + y][i] = img->cor_atual[i];
-            img->matriz[x0 - x][y0 + y][i] = img->cor_atual[i];
-            img->matriz[x0 + x][y0 - y][i] = img->cor_atual[i];
-            img->matriz[x0 - x][y0 - y][i] = img->cor_atual[i];
-            img->matriz[x0 + y][y0 + x][i] = img->cor_atual[i];
-            img->matriz[x0 - y][y0 + x][i] = img->cor_atual[i];
-            img->matriz[x0 + y][y0 - x][i] = img->cor_atual[i];
-            img->matriz[x0 - y][y0 - x][i] = img->cor_atual[i];
+            img->matrizimg[x0 + x][y0 + y][i] = img->cor_img[i];
+            img->matrizimg[x0 - x][y0 + y][i] = img->cor_img[i];
+            img->matrizimg[x0 + x][y0 - y][i] = img->cor_img[i];
+            img->matrizimg[x0 - x][y0 - y][i] = img->cor_img[i];
+            img->matrizimg[x0 + y][y0 + x][i] = img->cor_img[i];
+            img->matrizimg[x0 - y][y0 + x][i] = img->cor_img[i];
+            img->matrizimg[x0 + y][y0 - x][i] = img->cor_img[i];
+            img->matrizimg[x0 - y][y0 - x][i] = img->cor_img[i];
         }
     }
 }
 
-//Função recursiva para a execução do fill
-void rec_fill(imagem *img, int x, int y, int cor_inicial[]){
+//Função recursiva adaptada do colega de classe Rodrigo para a execução do fill no preenchimento
+void rec_fill(image *img, int x, int y, int color_initial[]){
 
-    int pixel_valido = 1;
+    int pixel_validate = 1;
 
     for (int i = 0; i < 3; ++i)
     {
-        if(cor_inicial[i] != img->matriz[y][x][i]){
+        if(color_initial[i] != img->matrizimg[y][x][i]){
 
-            pixel_valido = 0;
+            pixel_validate = 0;
             break;
         }
     }
 
-    if(pixel_valido == 1){
+    if(pixel_validate == 1){
 
         for (int i = 0; i < 3; ++i)
         {
-            img->matriz[y][x][i] = img->cor_atual[i];
+            img->matrizimg[y][x][i] = img->cor_img[i];
         }
 
         if(x - 1 >= 0){
 
-            rec_fill(img, x - 1, y, cor_inicial);
+            rec_fill(img, x - 1, y, color_initial);
         }
 
-        if(x + 1 < img->largura){
+        if(x + 1 < img->larguraimg){
 
-            rec_fill(img, x + 1, y, cor_inicial);
+            rec_fill(img, x + 1, y, color_initial);
         }
 
         if(y - 1 >= 0){
 
-            rec_fill(img, x, y - 1, cor_inicial);
+            rec_fill(img, x, y - 1, color_initial);
         }
     
-        if(y + 1 < img->altura){
+        if(y + 1 < img->alturaimg){
 
-            rec_fill(img, x, y + 1, cor_inicial);
+            rec_fill(img, x, y + 1, color_initial);
         }
     }
 }
 
-// preenche figuras
-void fill(imagem *img, int parametros[]){
+// preenchimento de figuras
+void fill(image *img, int entrada[]){
 
-    int x = parametros[0];
-    int y = parametros[1];
-    int cor_inicial[3];
-    int pintado = 1;
+    int x = entrada[0];
+    int y = entrada[1];
+    int color_initial[3];
+    int colorido = 1;
 
     for (int i = 0; i < 3; ++i)
     {
-        cor_inicial[i] = img->matriz[y][x][i];
+        color_initial[i] = img->matrizimg[y][x][i];
     }
 
     for (int i = 0; i < 3; ++i)
     {
-       if(img->cor_atual[i] != img->matriz[y][x][i]){
+       if(img->color_initial[i] != img->matrizimg[y][x][i]){
 
-            pintado = 0;
+            colorido = 0;
             break;
         }
     }
 
-    if(pintado == 0){
+    if(colorido == 0){
 
-        rec_fill(img, x, y, cor_inicial);  
+        rec_fill(img, x, y, color_initial);  
     } 
 }
  
-//Abre um arquivo de imagem ppm para edição
-void open(imagem *img, char nome_arquivo[]){
+//Abre um arquivo de imagem ppm para edição pelo usuário.
+void open(image *img, char name_arq[]){
 
-    char text[15];
-    char text_split[3][50];
-    char altura[5];
-    char largura[5];
-    char nome_arquivo_tratado[30];
-    int qtd_cores;
+    char texto[15];
+    char texto_split[3][50];
+    char alturaimg[5];
+    char larguraimg[5];
+    char name_arq_read[30];
+    int qtd_colors;
 
     for (int i = 0; i < 30; ++i)
     {
-        nome_arquivo_tratado[i] = '\0';
+        name_arq_read[i] = '\0';
     }
 
-    limpar_string_arquivo(nome_arquivo, nome_arquivo_tratado);
+    clean_str_arq(name_arq, name_arq_read);
 
     FILE *file;
-    file = fopen(nome_arquivo_tratado, "r");
+    file = fopen(name_arq_read, "r");
 
     if(file == NULL){
 
-        puts("Arquivo não encontrado");
+        puts("Arquivo não Localizado");
 
     } else {
 
-        fgets(text, 10, file);
-        fgets(text, 10, file);
+        fgets(texto, 10, file);
+        fgets(texto, 10, file);
         
-        split(text, " ", text_split);
+        split(texto, " ", texto_split);
         
-        strcpy(altura, text_split[1]);
-        strcpy(largura, text_split[0]);
+        strcpy(alturaimg, text_split[1]);
+        strcpy(larguraimg, texto_split[0]);
         
-        strcpy(img->nome_imagem, nome_arquivo_tratado);
+        strcpy(img->nome_image, name_arq_read);
 
-        sscanf(altura, "%d", &img->altura);
-        sscanf(largura, "%d", &img->largura);
+        sscanf(alturaimg, "%d", &img->alturaimg);
+        sscanf(larguraimg, "%d", &img->larguraimg);
 
-        realocar_matriz(img);
+        realoc_mat(img);
 
-        //printf(">>>Altura: %d\n", img->altura);
-        //printf(">>>Largura: %d\n", img->largura);
+        qtd_colors = img->alturaimg * img->larguraimg * 3;
 
-        qtd_cores = img->altura * img->largura * 3;
+        char colors[(qtd_colors + 1) * 12];
+        char vector_colors[qtd_colors][50];
 
-        char cores[(qtd_cores + 1) * 12];
-        char vetor_cores[qtd_cores][50];
+        fgets(texto, 15, file);
+        fgets(colors, qtd_colors * 4 , file);
 
-        fgets(text, 15, file);
-        fgets(cores, qtd_cores * 4 , file);
+        split(colors, " ", vector_colors);
 
-        split(cores, " ", vetor_cores);
-
-        int indice = 0;
-        for (int i = 0; i < img->altura; ++i)
+        int ind = 0;
+        for (int i = 0; i < img->alturaimg; ++i)
         {
-            for (int j = 0; j < img->largura; ++j)
+            for (int j = 0; j < img->larguraimg; ++j)
             {
                 for (int k = 0; k < 3; ++k)
                 {   
-                    sscanf(vetor_cores[indice], "%d", &img->matriz[i][j][k]);
+                    sscanf(vector_colors[ind], "%d", &img->matrizimg[i][j][k]);
                     indice++;
                 }
             }
@@ -424,12 +419,11 @@ void open(imagem *img, char nome_arquivo[]){
     }
 }
 
-//Define a resolução da imagem
-void image(imagem *img, int parametros[]) {
+//Define a resolução da imagem criada, adaptado do colega Rodrigo
+void image(image *img, int entrada[]) {
 
-    img->altura = parametros[1];
-    img->largura = parametros[0];
-    //printf("Largura: %d\n", img->largura);
-    //printf("Altura: %d\n", img->altura);
-    realocar_matriz(img);
+    img->alturaimg = entrada[1];
+    img->larguraimg = entrada[0];
+    
+    realoc_mat(img);
 }
