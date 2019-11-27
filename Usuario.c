@@ -1,7 +1,7 @@
-#include "structs.h"
-#include "fuctions.h"
-#include "primitivas.h"
-#include "exec.h"
+#include "StructsIniciais.h"
+#include "Funcs.h"
+#include "PrimiGraphics.h"
+#include "FuncoesUsuario.h"
 
 int main(){
 
