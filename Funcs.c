@@ -98,7 +98,7 @@ void limpar_string_arq(char in[], char out[]){
 
 //Limpa a matriz que representa a imagem na memória
 //desaloc_mat desalocar a matriz
-void desaloc_mat(image *img){
+void desaloc_mat(imagem *img){
 
     for (int i = 0; i < img->alturaimg; ++i)
     {
@@ -117,9 +117,9 @@ void desaloc_mat(image *img){
     free(img->matrizimg);
 }
 //aloc_mat aloca matriz
-image aloc_mat(){
+imagem aloc_mat(){
 
-    image img;
+    imagem img;
 
     img.matrizimg = malloc(sizeof(int**) * 1);
     img.matrizimg[0] = malloc(sizeof(int*) * 1);
@@ -130,7 +130,7 @@ image aloc_mat(){
 
 //Realoca a matriz que representa a imagem na memória de acordo com resolução desejada
 //realocar_matriz == realoc_mat
-void realoc_mat(image *img){
+void realoc_mat(imagem *img){
 
     
     img->matrizimg = realloc(img->matrizimg, sizeof(int**) * img->alturaimg);
