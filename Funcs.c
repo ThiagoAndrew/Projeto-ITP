@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "structs.h"
+#include "StructsIniciais.h"
 
 //Divide uma string em um vetor de strings usando um delimitador (delim)
-//str_in == string_entrada
+//str_in entrada
 void split(char str_in[], char delim[], char retorno[][50]){
  
     int tam_delim = 0;
     int indice_str_atual = 0; 
-    int indice_retorno = 0; 
+    int indice_retorna = 0; 
  
     while(delim[tam_delim] != '\0'){
         tam_delim++;
@@ -21,7 +21,7 @@ void split(char str_in[], char delim[], char retorno[][50]){
 
         if(str_in[i] == delim[0]){
  
-            int corresponde = 1;
+            int correspondente = 1;
             int loops = 0;
             for (int j = 1; j < tam_delim; ++j)
             {
@@ -29,23 +29,23 @@ void split(char str_in[], char delim[], char retorno[][50]){
  
                 if(str_in[i + j] != delim[j] ){
  
-                    corresponde = 0;
+                    correspondente = 0;
                     break;
                 }
             }
 
-            if(corresponde == 1){
+            if(correspondente == 1){
  
-                retorno[indice_retorno][indice_str_atual] = '\0';
+                retorno[indice_retorna][indice_str_atual] = '\0';
                 i += tam_delim -1; 
-                indice_retorno++; 
+                indice_retorna++; 
                 indice_str_atual = 0; 
  
             } else {
  
                 for (int l = i; l <= i + loops; ++l)
                 {
-                    retorno[indice_retorno][indice_str_atual] = str_in[l];
+                    retorno[indice_retorna][indice_str_atual] = str_in[l];
                     indice_str_atual++;
                 }
                 i += loops;
@@ -53,23 +53,23 @@ void split(char str_in[], char delim[], char retorno[][50]){
  
         } else {
  
-            retorno[indice_retorno][indice_str_atual] = str_in[i];
+            retorno[indice_retorna][indice_str_atual] = str_in[i];
             indice_str_atual++;
         }
         i++;
     }
-    retorno[indice_retorno][indice_str_atual] = '\0'; 
+    retorno[indice_retorna][indice_str_atual] = '\0'; 
 }
-//in == entrada
+//in entrada da variavel.
 int numero(char in){
 
     int i = 0;
     int indice = 0;
-    int numeros[] = {'1','2','3','4','5','6','7','8','9','0'};
+    int numbers[] = {'1','2','3','4','5','6','7','8','9','0'};
 
     for (int i = 0; i < 10; ++i)
     {
-       if(in == numeros[i]){
+       if(in == numbers[i]){
             return 1;
        }
     }
@@ -77,8 +77,8 @@ int numero(char in){
 }
 
 //Retira os espaços em branco e caracteres que não são alfanuméricos ou em branco
-//saída == out
-void limpar_string_arquivo(char in[], char out[]){
+//out saída do resultado.
+void limpar_string_arq(char in[], char out[]){
 
     int i = 0;
     while(1){
@@ -97,58 +97,55 @@ void limpar_string_arquivo(char in[], char out[]){
 }
 
 //Limpa a matriz que representa a imagem na memória
-//desalocar_matriz == desaloc_mat
-void desaloc_mat(imagem *img){
+//desaloc_mat desalocar a matriz
+void desaloc_mat(image *img){
 
-    //puts("desalocando a matriz");
-    for (int i = 0; i < img->altura; ++i)
+    for (int i = 0; i < img->alturaimg; ++i)
     {
-        for (int j = 0; j < img->largura; ++j)
+        for (int j = 0; j < img->larguraimg; ++j)
         {
-            free(img->matriz[i][j]);
+            free(img->matrizimg[i][j]);
                   
         }
     }
 
-    for (int i = 0; i < img->altura; ++i)
+    for (int i = 0; i < img->alturaimg; ++i)
     {
-        free(img->matriz[i]);
+        free(img->matrizimg[i]);
     }
 
-    free(img->matriz);
+    free(img->matrizimg);
 }
-//alocar_matriz == aloc_mat
-imagem aloc_mat(){
+//aloc_mat aloca matriz
+image aloc_mat(){
 
-    imagem img;
+    image img;
 
-    img.matriz = malloc(sizeof(int**) * 1);
-    img.matriz[0] = malloc(sizeof(int*) * 1);
-    img.matriz[0][0] = malloc(sizeof(int) * 3); 
+    img.matrizimg = malloc(sizeof(int**) * 1);
+    img.matrizimg[0] = malloc(sizeof(int*) * 1);
+    img.matrizimg[0][0] = malloc(sizeof(int) * 3); 
 
     return img;
 }
 
 //Realoca a matriz que representa a imagem na memória de acordo com resolução desejada
 //realocar_matriz == realoc_mat
-void realoc_mat(imagem *img){
+void realoc_mat(image *img){
 
-    //printf("Alt: %d\n", img->altura);
-    //printf("Larg: %d\n", img->largura);
-    //puts("realocando...");
-    img->matriz = realloc(img->matriz, sizeof(int**) * img->altura);
+    
+    img->matrizimg = realloc(img->matrizimg, sizeof(int**) * img->alturaimg);
   
-    for (int i = 0; i < img->altura; ++i)
+    for (int i = 0; i < img->alturaimg; ++i)
     {
-        img->matriz[i] = realloc(img->matriz[i], sizeof(int*) * img->largura);
+        img->matrizimg[i] = realloc(img->matrizimg[i], sizeof(int*) * img->larguraimg);
     }
 
-    for (int i = 0; i < img->altura; ++i)
+    for (int i = 0; i < img->alturaimg; ++i)
     {
-        for (int j = 0; j < img->largura; ++j)
+        for (int j = 0; j < img->larguraimg; ++j)
         {
-            img->matriz[i][j] = realloc(img->matriz[i][j], sizeof(int) * 3); 
+            img->matrizimg[i][j] = realloc(img->matrizimg[i][j], sizeof(int) * 3); 
         }
     }
-    //puts("realocou");
+    
 }
