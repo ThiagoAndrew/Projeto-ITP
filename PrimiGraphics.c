@@ -25,12 +25,12 @@ void save(imagem *img, char name_arq[]){
 }
 
 //Função para criar uma reta na imagem
-void line(imagem *img, int entrada[]) {
+void line(imagem *img, int entrance[]) {
 
-    int x0 = entrada[0];
-    int x1 = entrada[2];
-    int y0 = entrada[1];
-    int y1 = entrada[3];
+    int x0 = entrance[0];
+    int x1 = entrance[2];
+    int y0 = entrance[1];
+    int y1 = entrance[3];
     int err, dy, dx, sx, sy, e2;
 
     dx = abs(x1 - x0);
@@ -82,23 +82,23 @@ void line(imagem *img, int entrada[]) {
     }
 }
 
-void repeat_line(imagem *img, int entrada[], entrada *digita_final){
+void repeat_line(imagem *img, int entrance[], entrada *digita_final){
 
     if(strcmp(digita_final->nome_entrada, "line") == 0){
 
-        int quant = entrada[0];
-        int delx0 = entrada[1];
-        int dely0 = entrada[2];
-        int delx1 = entrada[3];
-        int dely1 = entrada[4];
+        int quant = entrance[0];
+        int delx0 = entrance[1];
+        int dely0 = entrance[2];
+        int delx1 = entrance[3];
+        int dely1 = entrance[4];
         int nova_entrada[4];
 
         for (int i = 0; i < quant; ++i)
         {   
-            nova_entrada[0] = digita_final->entrada[0] + delx0 * (i + 1);
-            nova_entrada[1] = digita_final->entrada[1] + dely0 * (i + 1);
-            nova_entrada[2] = digita_final->entrada[2] + delx1 * (i + 1);
-            nova_entrada[3] = digita_final->entrada[3] + dely1 * (i + 1);
+            nova_entrada[0] = digita_final->entrance[0] + delx0 * (i + 1);
+            nova_entrada[1] = digita_final->entrance[1] + dely0 * (i + 1);
+            nova_entrada[2] = digita_final->entrance[2] + delx1 * (i + 1);
+            nova_entrada[3] = digita_final->entrance[3] + dely1 * (i + 1);
             line(img, nova_entrada);
         }
         
@@ -108,9 +108,9 @@ void repeat_line(imagem *img, int entrada[], entrada *digita_final){
 //Função para criar uma reta na imagem
 void polygon(imagem *img, entrada in){
 
-    int qtd_point = in.entrada[0];
+    int qtd_point = in.entrance[0];
     int ordenY = in.qtdentrada -1;
-    int entrada[4];
+    int entrance[4];
     int rect[ordenY][4];
     int ind_rect = 0;
 
@@ -119,19 +119,19 @@ void polygon(imagem *img, entrada in){
     {
         if(i == ordenadas - 2) {
 
-            rect[ind_rect][0] = in.entrada[i + 1];
-            rect[ind_rect][1] = in.entrada[i + 2];
-            rect[ind_rect][2] = in.entrada[1];
-            rect[ind_rect][3] = in.entrada[2];
+            rect[ind_rect][0] = in.entrance[i + 1];
+            rect[ind_rect][1] = in.entrance[i + 2];
+            rect[ind_rect][2] = in.entrance[1];
+            rect[ind_rect][3] = in.entrance[2];
 
             ind_rect++;
                 
         } else {
 
-            rect[ind_rect][0] = in.entrada[i + 1];
-            rect[ind_rect][1] = in.entrada[i + 2];
-            rect[ind_rect][2] = in.entrada[i + 3];
-            rect[ind_rect][3] = in.entrada[i + 4];
+            rect[ind_rect][0] = in.entrance[i + 1];
+            rect[ind_rect][1] = in.entrance[i + 2];
+            rect[ind_rect][2] = in.entrance[i + 3];
+            rect[ind_rect][3] = in.entrance[i + 4];
 
             ind_rect++;
         }
@@ -143,23 +143,23 @@ void polygon(imagem *img, entrada in){
         for (int j = 0; j < 4; ++j)
         {
 
-            entrada[j] = rect[i][j];  
+            entrance[j] = rect[i][j];  
 
         }
 
-        line(img, entrada);
+        line(img, entrance);
     }
 }
 
 //Repete um polígono definido na linha anterior n vezes com incrementos na posição x e y
-void repeat_polygon(imagem *img, int entrada[], entrada *digita_final){
+void repeat_polygon(imagem *img, int entrance[], entrada *digita_final){
 
     if(strcmp(digita_final->nome_entrada, "polygon") == 0){
 
-        int quant = entrada[0];
-        int delx = entrada[1];
-        int dely = entrada[2];
-        int ordenY = digita_final->entrada[0] * 2;
+        int quant = entrance[0];
+        int delx = entrance[1];
+        int dely = entrance[2];
+        int ordenY = digita_final->entrance[0] * 2;
 
         entrada new_polygon = *digita_final;
 
@@ -167,8 +167,8 @@ void repeat_polygon(imagem *img, int entrada[], entrada *digita_final){
         {
             for (int j = 1; j < ordenY + 1; j+=2)
             {
-                new_polygon.entrada[j] += delx;
-                new_polygon.entrada[j + 1] += dely;
+                new_polygon.entrance[j] += delx;
+                new_polygon.entrance[j + 1] += dely;
             }
 
             polygon(img, new_polygon);
@@ -177,70 +177,70 @@ void repeat_polygon(imagem *img, int entrada[], entrada *digita_final){
 }
 
 //Copia o polígono definido na linha anterior para uma nova coordenada
-void copy_polygon(imagem *img, int entrada[], entrada *digita_final){
+void copy_polygon(imagem *img, int entrance[], entrada *digita_final){
 
-    int distancy_x = entrada[0] - digita_final->entrada[1];
-    int distancy_y = entrada[1] - digita_final->entrada[2];
-    int points = digita_final->entrada[0];
+    int distancy_x = entrance[0] - digita_final->entrance[1];
+    int distancy_y = entrance[1] - digita_final->entrance[2];
+    int points = digita_final->entrance[0];
     int qtdentrada = digita_final->qtdentrada;
 
     for (int i = 0; i < points * 2; i += 2)
     {
-        digita_final->entrada[i + 1] += distancy_x;
-        digita_final->entrada[i + 2] += distancy_y;
+        digita_final->entrance[i + 1] += distancy_x;
+        digita_final->entrance[i + 2] += distancy_y;
     }
 
     polygon(img, *digita_final);
 }
 
 //Definindo a cor atual
-void color(imagem *img, int entrada[]){
+void color(imagem *img, int entrance[]){
     
     for (int i = 0; i < 3; ++i)
     {
-        img->cor_img[i] = entrada[i];
+        img->cor_img[i] = entrance[i];
     }
 }
 
 //Limpa a imagem deixando todos os pixels com a cor recebida por parâmetro
-void clear(imagem *img, int entrada[]){
+void clear(imagem *img, int entrance[]){
 
     for(int i = 0; i < img->alturaimg; i++)
     {
         for (int j = 0; j < img->larguraimg; ++j)
         {   
-            img->matrizimg[i][j][0] = entrada[0];
-            img->matrizimg[i][j][1] = entrada[1];
-            img->matrizimg[i][j][2] = entrada[2];
+            img->matrizimg[i][j][0] = entrance[0];
+            img->matrizimg[i][j][1] = entrance[1];
+            img->matrizimg[i][j][2] = entrance[2];
         }
     }
 }
 
 //Criar retângulos
-void rect(imagem *img, int entrada[]){
+void rect(imagem *img, int entrance[]){
 
     entrada in;
     in.qtdentrada = 9; 
 
-    in.entrada[0] = 4;
-    in.entrada[1] = entrada[0];
-    in.entrada[2] = entrada[1];
-    in.entrada[3] = entrada[0] + entrada[2];
-    in.entrada[4] = entrada[1];
-    in.entrada[5] = entrada[0] + entrada[2];
-    in.entrada[6] = entrada[1] + entrada[3];
-    in.entrada[7] = entrada[0];
-    in.entrada[8] = entrada[1] + entrada[3];
+    in.entrance[0] = 4;
+    in.entrance[1] = entrance[0];
+    in.entrance[2] = entrance[1];
+    in.entrance[3] = entrance[0] + entrance[2];
+    in.entrance[4] = entrance[1];
+    in.entrance[5] = entrance[0] + entrance[2];
+    in.entrance[6] = entrance[1] + entrance[3];
+    in.entrance[7] = entrance[0];
+    in.entrance[8] = entrance[1] + entrance[3];
 
     polygon(img, in);
 }
 
 //Criar círculos
-void circle(imagem *img, int entrada[]){
+void circle(imagem *img, int entrance[]){
 
-    int r = entrada[2];
-    int x0 = entrada[0];
-    int y0 = entrada[1];
+    int r = entrance[2];
+    int x0 = entrance[0];
+    int y0 = entrance[1];
     int f = 1 - r;
     int ddF_x = 0;
     int ddF_y = -2 * raio;
@@ -326,10 +326,10 @@ void rec_fill(imagem *img, int x, int y, int color_initial[]){
 }
 
 // preenchimento de figuras
-void fill(imagem *img, int entrada[]){
+void fill(imagem *img, int entrance[]){
 
-    int x = entrada[0];
-    int y = entrada[1];
+    int x = entrance[0];
+    int y = entrance[1];
     int color_initial[3];
     int colorido = 1;
 
@@ -420,10 +420,10 @@ void open(imagem *img, char name_arq[]){
 }
 
 //Define a resolução da imagem criada, adaptado do colega Rodrigo
-void image(imagem *img, int entrada[]) {
+void image(imagem *img, int entrance[]) {
 
-    img->alturaimg = entrada[1];
-    img->larguraimg = entrada[0];
+    img->alturaimg = entrance[1];
+    img->larguraimg = entrance[0];
     
     realoc_mat(img);
 }
