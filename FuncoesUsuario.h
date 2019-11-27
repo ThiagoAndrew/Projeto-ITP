@@ -20,9 +20,9 @@ void compila(char name_arq[]);
   *Obs* "salva":  digita_final somente armazena uma primitiva quando corresponde a line ou polygon, 
 	para uso das funções repeat_line e repeat_polygon
 	
-  \param picture recebe um ponteiro de uma struct image com a imagem a ser modificada pelas primitivas
+  \param picture recebe um ponteiro de uma struct imagem com a imagem a ser modificada pelas primitivas
 */
 
-void leitura(entrada *digita_inicial, entrada *digita_final, image *img);
+void leitura(entrada *digita_inicial, entrada *digita_final, imagem *img);
 
 #endif
