@@ -36,7 +36,7 @@ void remove_barN(char entrada[], char saida[]);
 	\return Uma instancia da struct imagem com a matriz tridimensional alocada.
 */
 //aloc_mat alocação da matriz
-image aloc_mat();
+imagem aloc_mat();
 
 //! Realoca a matriz de pixels com o tamanho necessário.
 /*!
