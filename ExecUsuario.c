@@ -1,5 +1,5 @@
 #include "StructsIniciais.h"
-#include "FuncoesUsuario.h"
+#include "Funcs.h"
 #include "PrimiGraphics.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -81,7 +81,7 @@ void leitura(entrada *digita_inicial, entrada *digita_final, imagem *img){
 para a função que faz a leitura juntamente com uma instância da imagem*/
 void compila(char name_arq[]){
 //alocar_matriz == aloc_mat
-    imagem ***pic = aloc_mat();
+    imagem *pic = aloc_mat();
     entrada instrucao_inicial;
     entrada instrucao_final;
 
