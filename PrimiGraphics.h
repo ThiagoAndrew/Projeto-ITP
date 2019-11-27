@@ -7,7 +7,7 @@
 	\param img recebe o ponteiro com a imagem a salva.
 	\param name_arq é passado o nome do arquivo de imagem a ser salvo.
 */
-void save(image *img, char name_arq[]);
+void save(imagem *img, char name_arq[]);
 
 //! Cria uma linha.
 /*!
@@ -15,7 +15,7 @@ void save(image *img, char name_arq[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor com o ponto inicial e final da reta.
 */
-void line(image *img, int entrada[]);
+void line(imagem *img, int entrada[]);
 
 //! Cria um polígono.
 /*!
@@ -25,7 +25,7 @@ void line(image *img, int entrada[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor com a quantidade de pontos e as coordenadas deles.
 */
-void polygon(image *img, entrada in);
+void polygon(imagem *img, entrada in);
 
 //! Cria um círculo
 /*!
@@ -33,7 +33,7 @@ void polygon(image *img, entrada in);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param in recebe uma struct comando, de onde é retirado os parâmetros necessários para a execução da matriz.
 */
-void circle(image *img, int entrada[]);
+void circle(imagem *img, int entrada[]);
 
 //! Preenche superfícies.
 /*!
@@ -42,7 +42,7 @@ void circle(image *img, int entrada[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor, sendo as primeiras posições a coordenadas do ponto central, seguido do raio.
 */
-void fill(image *img, int entrada[]);
+void fill(imagem *img, int entrada[]);
 
 //! Define uma cor
 /*!
@@ -50,7 +50,7 @@ void fill(image *img, int entrada[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor contendo os três valores (rgb) para definir a cor.
 */
-void color(image *img, int entrada[]);
+void color(imagem *img, int entrada[]);
 
 //! Limpa uma imagem.
 /*!
@@ -58,7 +58,7 @@ void color(image *img, int entrada[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor contendo os três valores (rgb) para definir a cor a ser usada no preenchimento.
 */
-void clear(image *img, int entrada[]);
+void clear(imagem *img, int entrada[]);
 
 //! Cria um retângulo.
 /*!
@@ -66,7 +66,7 @@ void clear(image *img, int entrada[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor contendo a coordenada e os tamanhos x e y.
 */
-void rect(image *img, int entrada[]);
+void rect(imagem *img, int entrada[]);
 
 //! Repete uma linha.
 /*!
@@ -77,7 +77,7 @@ void rect(image *img, int entrada[]);
 	\param img recebe o ponteiro com a imagem a salva.
 	\param entrada recebe um vetor contendo a quantidade de repetições e os incrementos.
 */
-void repeat_line(image *img, int entrada[], entrada *digita_final);
+void repeat_line(imagem *img, int entrada[], entrada *digita_final);
 
 //! Repete um polígono.
 /*!
@@ -90,7 +90,7 @@ void repeat_line(image *img, int entrada[], entrada *digita_final);
 	\param digita_final recebe um ponteiro referente a uma struct comando que contem a última instrução que contem o polígono
 	a ser repetido.
 */
-void repeat_polygon(image *img, int entrada[], comando *digita_final);
+void repeat_polygon(imagem *img, int entrada[], entrada *digita_final);
 
 //! Copia um polígono.
 /*!
@@ -103,7 +103,7 @@ void repeat_polygon(image *img, int entrada[], comando *digita_final);
 	\param digita_final recebe um ponteiro referente a uma struct comando que contem a última instrução que contem o polígono
 	a ser repetido.
 */
-void copy_polygon(image *img, int entrada[], comando *digita_final);
+void copy_polygon(imagem *img, int entrada[], entrada *digita_final);
 
 //! Abre uma imagem.
 /*!
@@ -111,7 +111,7 @@ void copy_polygon(image *img, int entrada[], comando *digita_final);
 	\param img recebe o ponteiro com a imagem para qual a informação vinda do arquivo de imagem será salvada.
 	\param name_arq[] recebe o nome do arquivo de imagem que será aberto.
 */
-void open(image *img, char name_arq[]);
+void open(imagem *img, char name_arq[]);
 
 //! Define a resolução da imagem a ser criada.
 /*!
@@ -121,6 +121,6 @@ void open(image *img, char name_arq[]);
 	\param img recebe o ponteiro com a imagem e salva a resolução nela, além de passá-la para fazer a alocação.
 	\param entrada recebe um vetor com os valores referentes a resolução da imagem a ser criada.
 */
-void image(image *img, int entrada[]);
+void image(imagem *img, int entrada[]);
 
 #endif
