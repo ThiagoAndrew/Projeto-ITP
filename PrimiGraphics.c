@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//https://rosettacode.org/wiki/Bitmap/Write_a_PPM_file#C
 //Salva a imagem no arquivo de acordo com a matriz de pixels
 void save(imagem *img, char name_arq[]){
 
@@ -24,6 +25,7 @@ void save(imagem *img, char name_arq[]){
     fclose(file); 
 }
 
+//https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases
 //Função para criar uma reta na imagem
 void line(imagem *img, int entrance[]) {
 
@@ -236,6 +238,7 @@ void rect(imagem *img, int entrance[]){
 }
 
 //Criar círculos
+//https://rosettacode.org/wiki/Bitmap/Midpoint_circle_algorithm#C
 void circle(imagem *img, int entrance[]){
 
     int r = entrance[2];
