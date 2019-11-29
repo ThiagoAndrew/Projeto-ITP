@@ -99,4 +99,3 @@ usandoo comando ele irá resultar:
 ==3199== Use --track-origins=yes to see where uninitialised values come from
 ==3199== ERROR SUMMARY: 1619750 errors from 65 contexts (suppressed: 0 from 0)
 
-Com essa saída, o programa não apresenta memory leaks, isto é, toda a memória alocada é liberada no final da execução do programa. Porém, existem erros referentes ao uso de valores não inicializados no programa.
